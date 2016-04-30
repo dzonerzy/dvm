@@ -9,11 +9,11 @@ Feel free to contribute :)
 
 ```
 dzonerzy:dvm dzonerzy$ python dvm.py
-Result:
-
 DANIELONE
 
-Execution ended with 2985 vCPU cycles
+Stats:
+[+] vCPU instruction: 3830
+[+] vCPU loops: 879
 ```
 
 \#dzonerzy
