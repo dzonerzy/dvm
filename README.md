@@ -12,8 +12,10 @@ dzonerzy:dvm dzonerzy$ python dvm.py
 DANIELONE
 
 Stats:
-[+] vCPU instruction: 3830
-[+] vCPU loops: 879
+[+] vCPU instructions: 3890
+[+] VM loops: 879
+[+] VM exec instructions: 60
+[+] Exec time: 0.00928592681885 secs
 ```
 
 \#dzonerzy
