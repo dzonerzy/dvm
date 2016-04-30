@@ -1,7 +1,6 @@
 __author__ = 'dzonerzy'
 
 class Opcodes:
-
     ops = dict({
         "INCP": 0xa0,  # incrementa base pointer
         "DECP": 0xa1,  # decrementa base pointer

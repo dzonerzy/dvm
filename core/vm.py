@@ -1,5 +1,6 @@
 __author__ = 'dzonerzy'
 import sys
+import time
 import trace
 from core.memory import Memory
 from core.opcodes import Opcodes, ReserverdBytes
@@ -13,6 +14,8 @@ class Dvm:
     stats = None
     vcpu = vCPU()
     vcpuloop = 0
+    vminstruction = 0
+    start_time = time.time()
 
     def __init__(self, path):
         self.stats = self.vm_exec
@@ -46,6 +49,7 @@ class Dvm:
                     else:
                         params.append(self.mem.ram[self.mem.bp])
                         self.mem.inc_bp(1)
+                self.vminstruction += 1
                 return self._process_instruction(self.mem, instruction, params)
         raise VMUnsupportedInstruction(instruction)
 
@@ -70,4 +74,5 @@ class Dvm:
         for c in r.counts:
             if "memory.py" not in c[0]:
                 instructions += r.counts[c]
-        print "\nStats:\n[+] vCPU instruction: %s\n[+] vCPU loops: %s" % (instructions, self.vcpuloop)
+        print "\nStats:\n[+] vCPU instructions: %s\n[+] VM loops: %s\n[+] VM exec instructions: %s\n[+] Exec time: %s secs" % \
+              (instructions, self.vcpuloop, self.vminstruction, time.time()-self.start_time)
