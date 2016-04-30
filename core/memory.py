@@ -1,4 +1,5 @@
 __author__ = 'dzonerzy'
+from core.errors import VMRegisterOutOfBounds
 
 class Memory:
     # large memory
@@ -36,17 +37,25 @@ class Memory:
     def _load_bytecode(self, bytecode):
         for _byte in bytecode:
             self.ram.insert(self.bp, ord(_byte))
-            self.inc_bp()
+            self.inc_bp(1)
         self.bp = 0
 
-    def inc_bp(self):
-        self.bp += 1
+    def inc_bp(self, x):
+        self.bp += x
+        if not 0 <= self.bp <= 4096:
+            raise VMRegisterOutOfBounds("bp")
 
-    def dec_bp(self):
-        self.bp -= 1
+    def dec_bp(self, x):
+        self.bp -= x
+        if not 0 <= self.bp <= 4096:
+            raise VMRegisterOutOfBounds("bp")
 
-    def inc_sp(self):
-        self.sp += 1
+    def inc_sp(self, x):
+        self.sp += x
+        if not 0 <= self.sp <= 4096:
+            raise VMRegisterOutOfBounds("sp")
 
-    def dec_sp(self):
-        self.sp -= 1
+    def dec_sp(self, x):
+        self.sp -= x
+        if not 0 <= self.sp <= 4096:
+            raise VMRegisterOutOfBounds("sp")

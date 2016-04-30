@@ -40,6 +40,8 @@ class Opcodes:
 
         "SA": 0x1a,  # salta vanti
         "SD": 0x1b,  # salta dietro
+
+        "LICSP": 0x90  # leggi input copia stack pointer
     })
 
     ops_size = dict({
@@ -79,6 +81,7 @@ class Opcodes:
         0x1a: 1,  # SA
         0x1b: 1,  # SD
 
+        0x90: 0,  # LICSP
 
     })
 

@@ -18,29 +18,31 @@ class vCPU:
                               0x1a: self.SA,
                               0x1b: self.SD,
                               0xc0: self.SSU,
+                              0x90: self.LICSP,
                               })
 
-    def SSP(self, vmem, param):
+    def SSP(self, vmem, params):
         tmp = ""
         while vmem.stack[vmem.sp] != 0:
             tmp += chr(vmem.stack[vmem.sp])
-            vmem.sp += 1
+            vmem.inc_sp(1)
         print tmp
-        vmem.sp += 1
+        vmem.inc_sp(1)
         return 1
 
-    def TOSP(self, vmem, param):
-        vmem.sp -= param[0]
+    def TOSP(self, vmem, params):
+        vmem.dec_sp(params[0])
         return 1
 
-    def AGSP(self, vmem, param):
-        vmem.sp += param[0]
+    def AGSP(self, vmem, params):
+        #vmem.sp += param[0]
+        vmem.inc_sp(params[0])
         return 1
 
     def CSTRSP(self, vmem, params):
         for ch in params[0]:
             vmem.stack.insert(vmem.sp, ord(ch))
-            vmem.inc_sp()
+            vmem.inc_sp(1)
         return 1
 
     def EXT(self, vmem, params):
@@ -56,12 +58,12 @@ class vCPU:
 
     def SSDD(self, vmem, params):
         if vmem.nef:
-            vmem.bp -= params[0]
+            vmem.dec_bp(params[0])
         return 1
 
     def SSU(self, vmem, params):
         if vmem.ef:
-            vmem.bp += params[0]
+            vmem.inc_bp(params[0])
         return 1
 
     def CB(self, vmem, params):
@@ -82,17 +84,25 @@ class vCPU:
         return 1
 
     def INCSP(self, vmem, params):
-        vmem.inc_sp()
+        vmem.inc_sp(1)
         return 1
 
     def DECSP(self, vmem, params):
-        vmem.dec_sp()
+        vmem.dec_sp(1)
         return 1
 
     def SA(self, vmem, params):
-        vmem.bp += params[0]
+        vmem.inc_bp(params[0])
         return 1
 
     def SD(self, vmem, params):
-        vmem.bp -= params[0]
+        vmem.dec_bp(params[0])
         return 1
+
+    def LICSP(self, vmem, params):
+        tocpy = raw_input()
+        for ch in tocpy+"\x00":
+            vmem.stack[vmem.sp] = ord(ch)
+            vmem.inc_sp(1)
+        return 1
+
