@@ -5,4 +5,15 @@ This is just an experimental project, based on a custom VM implementation with s
 
 Feel free to contribute :)
 
+#Output
+
+```
+dzonerzy:dvm dzonerzy$ python dvm.py
+Result:
+
+DANIELONE
+
+Execution ended with 2985 vCPU cycles
+```
+
 \#dzonerzy
