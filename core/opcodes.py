@@ -46,8 +46,8 @@ class Opcodes:
     ops_size = dict({
         0xa0: 0,  # INCP
         0xa1: 0,  # DECP
-        0xb0: 0,  # INCSP
-        0xb1: 0,  # DECSP
+        0xb0: 1,  # INCSP
+        0xb1: 1,  # DECSP
         0xdd: 1,  # INCBSP
         0xde: 1,  # DECBSP
 

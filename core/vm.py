@@ -17,9 +17,10 @@ class Dvm:
     vminstruction = 0
     start_time = time.time()
 
-    def __init__(self, path):
+    def __init__(self, path=None):
         self.stats = self.vm_exec
-        self._load(path)
+        if path is not None and path != "":
+            self._load(path)
 
     def _load(self, path):
         bc = file(path, "rb").read()
@@ -63,6 +64,10 @@ class Dvm:
         while self._single_step():
             pass
 
+    def vm_exec_mem(self, bytecode):
+        self.mem = Memory(bytecode)
+        self.vm_exec()
+
     def vm_exec_stats(self):
         tracer = trace.Trace(
             ignoredirs=[sys.prefix, sys.exec_prefix],
@@ -74,5 +79,5 @@ class Dvm:
         for c in r.counts:
             if "memory.py" not in c[0]:
                 instructions += r.counts[c]
-        print "\nStats:\n[+] vCPU instructions: %s\n[+] VM loops: %s\n[+] VM exec instructions: %s\n[+] Exec time: %s secs" % \
+        print "\nStats:\n[+] vCPU instructions: %s\n[+] VM loops: %s\n[+] VM exec instructions: %s\n[+] Exec time: %.3f secs" % \
               (instructions, self.vcpuloop, self.vminstruction, time.time()-self.start_time)

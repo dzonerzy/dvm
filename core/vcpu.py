@@ -84,11 +84,11 @@ class vCPU:
         return 1
 
     def INCSP(self, vmem, params):
-        vmem.inc_sp(1)
+        vmem.inc_sp(params[0])
         return 1
 
     def DECSP(self, vmem, params):
-        vmem.dec_sp(1)
+        vmem.dec_sp(params[0])
         return 1
 
     def SA(self, vmem, params):
