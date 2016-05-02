@@ -6,3 +6,5 @@ a = DVMCompiler("tocompile.dasm")
 a.compile()
 VM = Dvm()
 VM.vm_exec_mem(a.bytecode)
+
+
