@@ -26,9 +26,6 @@ class DVMCompiler:
                 finally:
                     return 1
 
-    def _get_label_instructions(self, label):
-        pass
-
     def _calculate_distance(self):
         pos = 0
         for line in self.program:
@@ -96,8 +93,8 @@ class DVMCompiler:
                         for ch in p:
                             self.bytecode += ch
 
-    def compile_and_run(self):
-        pass
-
     def compile_and_save(self):
-        pass
+        self.compile()
+        compiled = open(self.path + ".dvm", "wb")
+        compiled.write(self.bytecode)
+        compiled.close()
