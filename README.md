@@ -18,4 +18,27 @@ Stats:
 [+] Exec time: 0.00928592681885 secs
 ```
 
+#Compiler
+Simple program with loop
+```
+CSTRSP abcdefgh
+DECSP 9
+:1
+CB 0
+SSU :2
+INCBSP 1
+INCSP 1
+SD :1
+:2
+DECSP 8
+SSP
+EXT
+```
+Result
+```
+dzonerzy:dvm dzonerzy$ python compile.py
+bcdefghi
+dzonerzy:dvm dzonerzy$
+```
+
 \#dzonerzy
